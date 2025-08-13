@@ -137,19 +137,18 @@ function editTask(task, textDiv) {
 }
 
 //  Complete Task 
-// When marking complete:
-function completeTask(id, category) {
-  const task = tasks[category].find(t => t.id === id);
-  if (!task) return;
-  task.completed = true;
-  task.completedAt = new Date().toISOString();
-  completedTasks.push(task);
-  logToSheet(task);        // ← Log here
-  renderTasks(category);
-  saveTasks();
-  launchRocket();
-  showCompletionMessage();
-}
+function completeTask(taskId, category) {
+    const task = tasks[category].find(t => t.id === taskId);
+    if (task) {
+        task.completed = true;
+        task.completedAt = new Date().toISOString();
+        completedTasks.push(task);
+        // sendTaskToGoogleSheet(task); 
+        renderTasks(category);
+        saveTasks();
+        launchRocket();
+        showCompletionMessage();
+    }
 
 
 //  Launch Rocket Animation 
@@ -324,12 +323,32 @@ style.textContent = `
 document.head.appendChild(style);
 
 // Send Task to Google Sheet 
-async function logToSheet(task) {
-  await fetch(window.SHEET_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(task)
-  });
+function sendTaskToGoogleSheet(task) {
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwWBneY7rAiSxZC_DkzH8mXsn5JpZ64-9lgTm4OfdsWTzZ0Lq-9tJ7nKH7BbCroE2Qc/exec';
+    // Create a clean data object with all required fields
+    const taskData = {
+        taskId: task.id,
+        taskText: task.text,
+        taskCategory: task.category,
+        completedAt: task.completedAt || new Date().toISOString()
+    };
+    console.log('Sending task data to Google Sheets:', taskData);
+    
+    fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(taskData)
+    })
+    .then(response => {
+        console.log('Task sent to Google Sheets successfully');
+    })
+    .catch(error => {
+        console.error('Error sending task to Google Sheets:', error);
+    });
+}
 
 //  Export Completed Tasks to CSV
 function exportCompletedTasksToCSV() {
@@ -356,6 +375,7 @@ function exportCompletedTasksToCSV() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 }
+
 
 
 
