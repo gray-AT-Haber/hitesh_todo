@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Space Mission Control - Task Galaxy 🌌</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="floating-rocket">🚀</div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🚀 MISSION CONTROL 🌌</h1>
+            <p>Navigate through your task galaxy, space commander!</p>
+            <div class="mission-status">● MISSION ACTIVE</div>
+        </div>
+        
+        <div class="nav-buttons">
+            <button class="nav-btn active" onclick="showMatrix()">🌌 Task Galaxy</button>
+            <button class="nav-btn" onclick="showCompleted()">🏆 Mission Complete</button>
+        </div>
+        
+        <div id="matrix-page">
+            <div class="matrix-container">
+                <div class="quadrant urgent-important">
+                    <h2>🔴 CRITICAL MISSION</h2>
+                    <p style="opacity: 0.8; margin-bottom: 15px; font-size: 0.85rem; color: #ffab91;">Red Alert - Launch immediately!</p>
+                    <div class="task-input">
+                        <input type="text" placeholder="Enter critical mission..." id="urgent-important-input">
+                        <button class="add-btn" onclick="addTask('urgent-important')">🚀</button>
+                    </div>
+                    <div class="task-list" id="urgent-important-tasks"></div>
+                </div>
+                
+                <div class="quadrant urgent-not-important">
+                    <h2>🟡 SUPPORT MISSION</h2>
+                    <p style="opacity: 0.8; margin-bottom: 15px; font-size: 0.85rem; color: #ffcc02;">Yellow Alert - Delegate to crew</p>
+                    <div class="task-input">
+                        <input type="text" placeholder="Enter support mission..." id="urgent-not-important-input">
+                        <button class="add-btn" onclick="addTask('urgent-not-important')">🚀</button>
+                    </div>
+                    <div class="task-list" id="urgent-not-important-tasks"></div>
+                </div>
+                
+                <div class="quadrant not-urgent-important">
+                    <h2>🔵 EXPLORATION MISSION</h2>
+                    <p style="opacity: 0.8; margin-bottom: 15px; font-size: 0.85rem; color: #81d4fa;">Blue Alert - Plan trajectory</p>
+                    <div class="task-input">
+                        <input type="text" placeholder="Enter exploration mission..." id="not-urgent-important-input">
+                        <button class="add-btn" onclick="addTask('not-urgent-important')">🚀</button>
+                    </div>
+                    <div class="task-list" id="not-urgent-important-tasks"></div>
+                </div>
+                
+                <div class="quadrant not-urgent-not-important">
+                    <h2>🟣 LEISURE MISSION</h2>
+                    <p style="opacity: 0.8; margin-bottom: 15px; font-size: 0.85rem; color: #ce93d8;">Purple Alert - Enjoy the cosmos</p>
+                    <div class="task-input">
+                        <input type="text" placeholder="Enter leisure mission..." id="not-urgent-not-important-input">
+                        <button class="add-btn" onclick="addTask('not-urgent-not-important')">🚀</button>
+                    </div>
+                    <div class="task-list" id="not-urgent-not-important-tasks"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="completed-page" class="completed-page">
+            <button onclick="exportCompletedTasksToCSV()" style="margin: 20px 0; padding: 10px 18px; font-size: 1rem; border-radius: 8px; background: #1976d2; color: #fff; border: none; cursor: pointer;">
+                Export Completed Tasks to Excel
+            </button>
+            <div class="completed-container">
+                <div class="completed-header">
+                    <h2>🏆 MISSIONS ACCOMPLISHED</h2>
+                    <span style="font-size: 1.5rem;">Outstanding work, Commander! 🌟</span>
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-completed">0</div>
+                        <div class="stat-label">Total Missions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="urgent-completed">0</div>
+                        <div class="stat-label">Critical Missions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="important-completed">0</div>
+                        <div class="stat-label">Important Missions</div>
+                    </div>
+                </div>
+                
+                <div id="completed-tasks-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
