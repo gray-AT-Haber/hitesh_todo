@@ -143,7 +143,7 @@ function completeTask(taskId, category) {
         task.completed = true;
         task.completedAt = new Date().toISOString();
         completedTasks.push(task);
-        // sendTaskToGoogleSheet(task); 
+        sendTaskToGoogleSheet(task); 
         renderTasks(category);
         saveTasks();
         launchRocket();
@@ -375,6 +375,7 @@ function exportCompletedTasksToCSV() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 }
+
 
 
 
