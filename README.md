@@ -2,6 +2,8 @@
 Making a remote to-do for Hitesh with 4 different categories based on importance and urgency levels.
 It should also log the completed tasks into a Google Sheet file or into an Excel sheet.
 
+Site: https://hitesh-todo-41oo.vercel.app/
+
 The Data will be stored in your browser's localStorage which holds _all_ your tasks both pending and completed.
 
 The only times you'd "lose" everything are when you or your browser explicitly:
