@@ -324,11 +324,30 @@ document.head.appendChild(style);
 
 // Send Task to Google Sheet 
 function sendTaskToGoogleSheet(task) {
-    fetch('https://script.google.com/macros/s/AKfycbyl7OgHqF95T3L6RB7bKF33XKvD7e9uGaw96RCZwmU7xSo7jthHzBs6iqTMadKscSJn/exec', {
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwWBneY7rAiSxZC_DkzH8mXsn5JpZ64-9lgTm4OfdsWTzZ0Lq-9tJ7nKH7BbCroE2Qc/exec';
+    // Create a clean data object with all required fields
+    const taskData = {
+        taskId: task.id,
+        taskText: task.text,
+        taskCategory: task.category,
+        completedAt: task.completedAt || new Date().toISOString()
+    };
+    console.log('Sending task data to Google Sheets:', taskData);
+    
+    fetch(scriptURL, {
         method: 'POST',
-        body: JSON.stringify(task),
-        headers: { 'Content-Type': 'application/json' }
-    }).catch(() => {});
+        mode: 'no-cors',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(taskData)
+    })
+    .then(response => {
+        console.log('Task sent to Google Sheets successfully');
+    })
+    .catch(error => {
+        console.error('Error sending task to Google Sheets:', error);
+    });
 }
 
 //  Export Completed Tasks to CSV
@@ -356,4 +375,5 @@ function exportCompletedTasksToCSV() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 }
+
 
