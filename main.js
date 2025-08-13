@@ -325,7 +325,7 @@ document.head.appendChild(style);
 // Send Task to Google Sheet 
 // UPDATED Send Task to Google Sheet function - Fixed data structure
 function sendTaskToGoogleSheet(task) {
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwWBneY7rAiSxZC_DkzH8mXsn5JpZ64-9lgTm4OfdsWTzZ0Lq-9tJ7nKH7BbCroE2Qc/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwZfjKCx9XrErHPGX-58Akmr-PQTe8YRx1ntK1Q2doE4FUmBU9PbnLNItAH3ud6rA9I/exec';
     
     // Create a clean data object with all required fields
     const taskData = {
@@ -378,4 +378,5 @@ function exportCompletedTasksToCSV() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 }
+
 
