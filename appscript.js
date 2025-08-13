@@ -1,7 +1,7 @@
 function doPost(e) {
   try {
     // Get the active spreadsheet and specific sheet
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Sheet1");
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Completed Tasks");
     
     // Parse the JSON data from the request
     const data = JSON.parse(e.postData.contents);
@@ -70,7 +70,7 @@ function doPost(e) {
 
 // Setup function - run this FIRST to prepare your sheet
 function setupSheet() {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Sheet1");
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Completed Tasks");
   
   // Clear all existing data
   sheet.clear();
@@ -101,7 +101,7 @@ function setupSheet() {
 
 // Test function - run this to test with sample data
 function testTaskInsertion() {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Sheet1");
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Completed Tasks");
   
   // Create test data exactly like your frontend sends
   const testData = {
@@ -134,5 +134,6 @@ function testTaskInsertion() {
   console.log("- Column C: urgent-important");
   console.log("- Column D: Current timestamp");
 }
+
 
 //Script ID: 1-SN*****2DH-Ixa8xWxF0BdpZS9tE04NWwAIve7AbRL_MuTjqKgn5bx
